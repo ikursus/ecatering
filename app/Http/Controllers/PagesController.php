@@ -26,9 +26,19 @@ class PagesController extends Controller
   public function postContactForm( Request $request )
   {
 
-    $customer_name = $request->all();
+    // Untuk dapatkan 1 data daripada ruangan input yang dipilih
+    // $request->input('customer_name');
+    // Untuk terima data dari senarai input yang dipilih
+    // $request->only(['customer_name', 'customer_email']);
+    // Untuk terima data dari semua senarai input kecuali yang dinyatakan
+    // $request->except(['customer_message']);
+    // Untuk terima SEMUA input daripada borang yang dikirimkan
+    $request->all();
 
-    return $customer_name;
+    // Tetapkan variable untuk request all
+    $data = $request->all();
+    // Paparkan data
+    return $data;
 
   }
 
