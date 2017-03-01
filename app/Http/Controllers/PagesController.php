@@ -14,7 +14,7 @@ class PagesController extends Controller
   public function showContactForm()
   {
 
-    $page_title = '<u>Halaman Hubungi</u>';
+    $page_title = 'Halaman Hubungi';
 
     $tarikh = date('d-M-Y');
 
@@ -23,9 +23,12 @@ class PagesController extends Controller
 
   }
 
-  public function postContactForm() {
+  public function postContactForm( Request $request )
+  {
 
-    return 'Borang telah berjaya dihantar!';
+    $customer_name = $request->all();
+
+    return $customer_name;
 
   }
 
