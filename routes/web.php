@@ -13,7 +13,6 @@ Route::get('pakej', 'PagesController@senaraiPakej');
 
 
 
-
 // routing untuk users
 Route::get('profile/{username?}', function( $username = null ) {
 
