@@ -25,6 +25,14 @@ class PagesController extends Controller
 
   public function postContactForm( Request $request )
   {
+    // Fungsi untuk validate data daripada request
+    $this->validate( $request, array(
+      'customer_name' => 'required|min:3|string',
+      'customer_email' => 'required|email',
+      'customer_message' => 'required'
+    ) );
+
+
 
     // Untuk dapatkan 1 data daripada ruangan input yang dipilih
     // $request->input('customer_name');
