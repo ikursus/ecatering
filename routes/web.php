@@ -9,17 +9,9 @@ Route::get('/home', 'HomeController@index');
 Route::get('/', function () {
     return view('welcome');
 });
+
 // Halaman contact us
-Route::get('contact-us', function() {
-
-  $page_title = '<u>Halaman Hubungi</u>';
-
-  $tarikh = date('d-M-Y');
-
-  // resources/views/template_contact.php
-  return view('template_contact', compact('page_title', 'tarikh') );
-
-});
+Route::get('contact-us', 'PagesController@showContactForm');
 
 Route::post('contact-us', function() {
 
