@@ -48,7 +48,7 @@ class ProductsController extends Controller
       $data = $request->only(['name', 'price']);
 
       // Tetapkan variable product dan simpan data ke dalam database
-      $product = DB::table('products')->insert($data);
+      DB::table('products')->insert($data);
 
       return redirect()->route('showProducts')->with('alert-success', 'Data has been added!');
   }

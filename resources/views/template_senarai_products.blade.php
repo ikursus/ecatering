@@ -28,8 +28,10 @@
         <td>{{ $item->name }}</td>
         <td>{{ $item->price }}</td>
         <td>
+          <!-- Button edit product -->
           <a href="{{ route('editProduct', [$item->id] ) }}" class="btn btn-sm btn-primary">Edit</a>
-          <!-- Button trigger modal -->
+
+          <!-- Button delete product -->
           <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete-modal-{{ $item->id }}">
             Delete
           </button>
