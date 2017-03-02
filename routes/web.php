@@ -34,15 +34,5 @@ Route::patch('users/{id}', 'UsersController@simpanRekodUserLama');
 Route::delete('users/{id}', 'UsersController@destroy');
 
 
-// routing untuk users
-Route::get('profile/{username?}', function( $username = null ) {
-
-  return 'Username: ' . $username;
-
-});
-
-Route::get('sales/{pakej}', function( $pakej ) {
-
-  return 'Pakej: ' . $pakej;
-
-});
+// Halaman tempahan
+Route::get('tempahan', 'OrdersController@borangTempahan');

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
+use App\Product;
+
 class ProductsController extends Controller
 {
   /**
@@ -15,7 +17,8 @@ class ProductsController extends Controller
   public function index()
   {
     // Dapatkan semua rekod dari table products
-    $senarai_products = DB::table('products')->orderBy('id', 'desc')->paginate(2);
+    // $senarai_products = DB::table('products')->orderBy('id', 'desc')->paginate(2);
+    $senarai_products = Product::orderBy('id', 'desc')->paginate(2);
     // Paparkan template
     return view('template_senarai_products', compact('senarai_products') );
   }
@@ -45,10 +48,12 @@ class ProductsController extends Controller
       ]);
 
       // Terima data dari borang
-      $data = $request->only(['name', 'price']);
+      // $data = $request->only(['name', 'price']);
+      $data = $request->all();
 
       // Tetapkan variable product dan simpan data ke dalam database
-      DB::table('products')->insert($data);
+      // DB::table('products')->insert($data);
+      Product::create($data);
 
       return redirect()->route('showProducts')->with('alert-success', 'Data has been added!');
   }
@@ -73,7 +78,8 @@ class ProductsController extends Controller
   public function edit($id)
   {
       // Dapatkan 1 data dari table user berdasarkan ID yang dipilih
-      $product = DB::table('products')->where('id', '=', $id)->first();
+      // $product = DB::table('products')->where('id', '=', $id)->first();
+      $product = Product::where('id', '=', $id)->first();
 
       // Paparkan borang kemaskini user
       return view('template_borang_kemaskini_product', compact('product') );
@@ -98,7 +104,9 @@ class ProductsController extends Controller
     $data = $request->only(['name', 'price']);
 
     // Simpan data ke dalam database
-    DB::table('products')->where('id', '=', $id)->update($data);
+    // DB::table('products')->where('id', '=', $id)->update($data);
+    // Product::where('id', '=', $id)->update($data);
+    Product::find($id)->update($data);
 
     return redirect()->back()->with('alert-success', 'Data sudah dikemaskini!');
   }
@@ -112,9 +120,11 @@ class ProductsController extends Controller
   public function destroy($id)
   {
       // Dapatkan rekod user yang ingin dihapuskan
-      DB::table('products')
-      ->where('id', '=', $id)
-      ->delete();
+      // DB::table('products')
+      // ->where('id', '=', $id)
+      // ->delete();
+
+      Product::find($id)->delete();
 
       return redirect()->back()->with('alert-success', 'Data sudah dihapuskan!');
   }
