@@ -2,6 +2,11 @@
 
 @section('content')
 
+<div class="panel">
+  <div class="panel-heading">Senarai Produk</div>
+
+    <div class="panel-body">
+
 <p>Ini adalah senarai pakej menu hari Rabu</p>
 
   <table class="table table-bordered">
@@ -22,5 +27,6 @@
 
     </tbody>
 </table>
-
+  </div><!--/panel-body-->
+</div><!--/panel-->
 @endsection

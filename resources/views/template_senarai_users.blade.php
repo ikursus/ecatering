@@ -2,7 +2,14 @@
 
 @section('content')
 
-<p>Ini adalah senarai users</p>
+<div class="panel">
+  <div class="panel-heading">Senarai Users</div>
+
+    <div class="panel-body">
+
+<p><a href="{{ url('users/add') }}" class="btn btn-primary">Add User</a></p>
+
+<p>Ini adalah senarai users.</p>
 
   <table class="table table-bordered">
     <thead>
@@ -32,5 +39,6 @@
 </table>
 
 {{ $senarai_users->links() }}
-
+  </div><!--/panel-body-->
+</div><!--/panel-->
 @endsection
