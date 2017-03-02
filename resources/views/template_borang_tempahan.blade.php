@@ -17,12 +17,12 @@
         </div>
       @endif
 
-      <form method="POST" action="{{ route('storeProduct') }}">
+      <form method="POST" action="{{ route('simpanRekodTempahan') }}">
 
         <div class="form-group">
           <select name="product_id" class="form-control">
             @foreach( $products as $item )
-            <option value="{{ $item->id }}">{{ $item->name }}</option>
+            <option value="{{ $item->id }}">{{ $item->name }} [{{ $item->price }}]</option>
             @endforeach
           </select>
         </div>

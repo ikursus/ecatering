@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Product;
 use App\Order;
 
@@ -26,7 +27,7 @@ class OrdersController extends Controller
     public function borangTempahan()
     {
       // Dapatkan senarai products
-      $products = Product::select( 'id', 'name')->get();
+      $products = Product::select( 'id', 'name', 'price')->get();
 
       // Paparkan borang tempahan product
       return view('template_borang_tempahan', compact('products') );
@@ -38,9 +39,21 @@ class OrdersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function simpanRekodTempahan(Request $request)
     {
-        //
+        $this->validate($request, [
+          'product_id' => 'required|integer',
+          'customer_name' => 'required|string',
+          'customer_email' => 'required|email'
+        ]);
+
+        // Terima semua data dari borang
+        $data = $request->all();
+        $data['status'] = 'pending';
+
+        Order::create($data);
+
+        return redirect()->back()->with('alert-success', 'Tempahan anda telah diterima!');
     }
 
     /**
@@ -49,9 +62,10 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function borangStatusTempahan()
     {
-        //
+      // Paparkan borang tempahan product
+      return view('template_borang_status_tempahan');
     }
 
     /**
@@ -60,9 +74,15 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function paparStatusTempahan(Request $request)
     {
-        //
+        $this->validate( $request, [
+          'customer_email' => 'required|email'
+        ]);
+
+        $order = Order::where('customer_email', '=', $request->input('customer_email') )->first();
+
+        return view('template_status_tempahan', compact('order') );
     }
 
     /**

@@ -36,3 +36,7 @@ Route::delete('users/{id}', 'UsersController@destroy');
 
 // Halaman tempahan
 Route::get('tempahan', 'OrdersController@borangTempahan');
+Route::post('tempahan', 'OrdersController@simpanRekodTempahan')->name('simpanRekodTempahan');
+// Halaman semakan tempahan
+Route::get('status-tempahan', 'OrdersController@borangStatusTempahan');
+Route::post('status-tempahan', 'OrdersController@paparStatusTempahan')->name('paparStatusTempahan');
