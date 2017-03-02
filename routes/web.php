@@ -10,6 +10,12 @@ Route::get('/', 'PagesController@homepage');
 Route::get('contact-us', 'PagesController@showContactForm');
 Route::post('contact-us', 'PagesController@postContactForm');
 Route::get('pakej', 'PagesController@senaraiPakej');
+// Paparkan senarai users bagi alamat web http://localhost/catering/public/senarai-users
+Route::get('senarai-users', 'UsersController@index');
+
+// Proses penambahan rekod user baru
+Route::get('users/add', 'UsersController@paparBorangTambahUser');
+Route::post('users/add', 'UsersController@simpanRekodUserBaru');
 
 
 

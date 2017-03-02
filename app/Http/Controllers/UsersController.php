@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class UsersController extends Controller
 {
@@ -13,7 +14,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+      // Dapatkan semua rekod dari table users
+      $senarai_users = DB::table('users')->orderBy('id', 'desc')->paginate(2);
+      // Paparkan template
+      return view('template_senarai_users', compact('senarai_users') );
     }
 
     /**
@@ -21,9 +25,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function paparBorangTambahUser()
     {
-        //
+        return view('template_borang_tambah_user');
     }
 
     /**
@@ -32,9 +36,27 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function simpanRekodUserBaru(Request $request)
     {
-        //
+        // Validate data
+        $this->validate($request, [
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required|min:3|confirmed',
+            'role' => 'required|in:user,admin'
+        ]);
+
+        // Terima data dari borang
+        $data = $request->only(['name', 'email', 'role', 'phone', 'address']);
+
+        // Dapatkan data dari field password dan bcrypt
+        $data['password'] = bcrypt( $request->input('password'));
+
+        // Simpan data ke dalam database
+        DB::table('users')->insert( $data );
+
+        return redirect('senarai-users');
+
     }
 
     /**
