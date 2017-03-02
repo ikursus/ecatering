@@ -56,7 +56,6 @@ class UsersController extends Controller
         DB::table('users')->insert( $data );
 
         return redirect('senarai-users');
-
     }
 
     /**
