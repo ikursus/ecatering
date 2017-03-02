@@ -7,6 +7,9 @@
 
     <div class="panel-body">
 
+<p><a href="{{ url('senarai-users') }}" class="btn btn-default">Senarai Users</a></p>
+<hr>
+
       @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
