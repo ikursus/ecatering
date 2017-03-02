@@ -15,4 +15,9 @@ class Product extends Model
       'price'
     );
 
+    public function senaraiOrders()
+    {
+      return $this->hasMany(Order::class);
+    }
+
 }

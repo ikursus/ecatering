@@ -21,6 +21,9 @@ Route::patch('products/{id}', 'ProductsController@update')->name('updateProduct'
 // Route to product user
 Route::delete('products/{id}', 'ProductsController@destroy')->name('deleteProduct');
 
+// Paparkan senarai order bagi produk yang dipilih
+Route::get('products/{id}/orders', 'ProductsController@senaraiOrders')->name('senaraiOrders');
+
 
 // Paparkan senarai users bagi alamat web http://localhost/catering/public/senarai-users
 Route::get('senarai-users', 'UsersController@index');

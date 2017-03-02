@@ -30,6 +30,7 @@
         <td>
           <!-- Button edit product -->
           <a href="{{ route('editProduct', [$item->id] ) }}" class="btn btn-sm btn-primary">Edit</a>
+          <a href="{{ route('senaraiOrders', [$item->id] ) }}" class="btn btn-sm btn-primary">Orders</a>
 
           <!-- Button delete product -->
           <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete-modal-{{ $item->id }}">

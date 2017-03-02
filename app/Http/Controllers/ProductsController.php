@@ -64,9 +64,12 @@ class ProductsController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show($id)
+  public function senaraiOrders($id)
   {
-      //
+      // Dapatkan maklumat produk
+      $product = Product::find($id);
+
+      return view('template_product_senarai_orders', compact('product') );
   }
 
   /**
