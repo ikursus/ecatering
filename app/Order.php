@@ -17,7 +17,8 @@ class Order extends Model
       'payment_amount'
     ];
 
-
+    // Relationship table order bagi column product_id
+    // dengan table product bagi column id
     public function product()
     {
       return $this->belongsTo(Product::class);
