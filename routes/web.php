@@ -16,7 +16,12 @@ Route::get('senarai-users', 'UsersController@index');
 // Proses penambahan rekod user baru
 Route::get('users/add', 'UsersController@paparBorangTambahUser');
 Route::post('users/add', 'UsersController@simpanRekodUserBaru');
+// Proses kemaskini rekod user lama
+Route::get('users/{id}', 'UsersController@paparBorangKemaskiniUser');
+Route::patch('users/{id}', 'UsersController@simpanRekodUserLama');
 
+// Route to delete user
+Route::delete('users/{id}', 'UsersController@destroy');
 
 
 // routing untuk users

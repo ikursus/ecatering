@@ -84,6 +84,12 @@
 
             <div class="col-md-12">
 
+                @if ( session('alert-success') )
+                  <div class="alert alert-success">
+                      {{ session('alert-success') }}
+                  </div>
+                @endif
+
                 @yield('content')
 
             </div><!--/col-->

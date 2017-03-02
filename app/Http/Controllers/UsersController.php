@@ -41,7 +41,7 @@ class UsersController extends Controller
         // Validate data
         $this->validate($request, [
             'name' => 'required|string',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:3|confirmed',
             'role' => 'required|in:user,admin'
         ]);
@@ -55,7 +55,7 @@ class UsersController extends Controller
         // Simpan data ke dalam database
         DB::table('users')->insert( $data );
 
-        return redirect('senarai-users');
+        return redirect('senarai-users')->with('alert-success', 'Data sudah ditambah!');
     }
 
     /**
@@ -75,9 +75,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function paparBorangKemaskiniUser($id)
     {
-        //
+        // Dapatkan 1 data dari table user berdasarkan ID yang dipilih
+        $user = DB::table('users')->where('id', '=', $id)->first();
+
+        // Paparkan borang kemaskini user
+        return view('template_borang_kemaskini_user', compact('user') );
     }
 
     /**
@@ -87,9 +91,28 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function simpanRekodUserLama(Request $request, $id)
     {
-        //
+      // Validate data
+      $this->validate($request, [
+          'name' => 'required|string',
+          'email' => 'required|email|unique:users,email,' . $id,
+          'role' => 'required|in:user,admin'
+      ]);
+
+      // Terima data dari borang
+      $data = $request->only(['name', 'email', 'role', 'phone', 'address']);
+
+      // Dapatkan data dari field password dan bcrypt sekiranya diisi
+      if ( ! is_null( $request->input('password') ) AND ! empty( $request->input('password') ) )
+      {
+        $data['password'] = bcrypt( $request->input('password') );
+      }
+
+      // Simpan data ke dalam database
+      DB::table('users')->where('id', '=', $id)->update( $data );
+
+      return redirect()->back()->with('alert-success', 'Data sudah dikemaskini!');
     }
 
     /**
@@ -100,6 +123,11 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Dapatkan rekod user yang ingin dihapuskan
+        $user = DB::table('users')
+        ->where('id', '=', $id)
+        ->delete();
+
+        return redirect()->back()->with('alert-success', 'Data sudah dihapuskan!');
     }
 }
