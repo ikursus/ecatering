@@ -29,10 +29,10 @@ Route::get('products/{id}/orders', 'ProductsController@senaraiOrders')->name('se
 Route::get('senarai-users', 'UsersController@index');
 // Proses penambahan rekod user baru
 Route::get('users/add', 'UsersController@paparBorangTambahUser');
-Route::post('users/add', 'UsersController@simpanRekodUserBaru');
+Route::post('users/add', 'UsersController@simpanRekodUserBaru')->name('storeUser');
 // Proses kemaskini rekod user lama
 Route::get('users/{id}', 'UsersController@paparBorangKemaskiniUser');
-Route::patch('users/{id}', 'UsersController@simpanRekodUserLama');
+Route::patch('users/{id}', 'UsersController@simpanRekodUserLama')->name('updateUser');
 // Route to delete user
 Route::delete('users/{id}', 'UsersController@destroy');
 

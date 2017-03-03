@@ -11,55 +11,22 @@
 <hr>
 
       @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+      @endif
 
-      <form method="POST" action="{{ url('users/' . $user->id ) }}">
-        <input type="hidden" name="_method" value="PATCH">
+      {!! Form::model( $user, ['method' => 'patch', 'route' => ['updateUser', $user->id ] ] ) !!}
 
-        <div class="form-group">
-          <input type="text" name="name" placeholder="User Name..." class="form-control" value="{{ $user->name }}">
-        </div>
+      @include('template_borang_user')
 
-        <div class="form-group">
-          <input type="email" name="email" placeholder="User Email..." class="form-control" value="{{ $user->email }}">
-        </div>
+      <button type="submit" class="btn btn-primary">Update User</button>
 
-        <div class="form-group">
-          <input type="text" name="phone" placeholder="User Phone..." class="form-control" value="{{ $user->phone }}">
-        </div>
-
-        <div class="form-group">
-          <input type="password" name="password" placeholder="User Password..." class="form-control">
-        </div>
-
-        <div class="form-group">
-          <input type="password" name="password_confirmation" placeholder="Confirm User Password..." class="form-control">
-        </div>
-
-        <div class="form-group">
-          <textarea name="address" class="form-control" placeholder="User Address">{{ $user->address }}</textarea>
-        </div>
-
-        <div class="form-group">
-          <select name="role" class="form-control">
-            <option value="">-- Please Select Role --</option>
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Update User</button>
-
-         {{ csrf_field() }}
-
-      </form>
+      {!! Form::close() !!}
     </div>
 </div>
 @endsection

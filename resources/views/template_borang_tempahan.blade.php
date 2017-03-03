@@ -17,22 +17,18 @@
         </div>
       @endif
 
-      <form method="POST" action="{{ route('simpanRekodTempahan') }}">
+        {!! Form::open( ['route' => 'simpanRekodTempahan' ] ) !!}
 
         <div class="form-group">
-          <select name="product_id" class="form-control">
-            @foreach( $products as $item )
-            <option value="{{ $item->id }}">{{ $item->name }} [{{ $item->price }}]</option>
-            @endforeach
-          </select>
+          {!! Form::select('product_id', $products->pluck('name', 'id'), null, ['class' => 'form-control'] ) !!}
         </div>
 
         <div class="form-group">
-          <input type="text" name="customer_name" placeholder="Your Name..." class="form-control">
+          {!! Form::text('customer_name', null, ['class' => 'form-control', 'placeholder' => 'Your Name...']) !!}
         </div>
 
-        <div class="form-group">
-          <input type="text" name="customer_email" placeholder="Your Email..." class="form-control">
+        <div class="form-group" id="customer_email">
+          <input type="text" name="customer_email" placeholder="Your Email..." class="form-control" value="{{ old('customer_email') }}">
         </div>
 
         <div class="form-group">
@@ -49,9 +45,7 @@
 
         <button type="submit" class="btn btn-primary">Hantar Tempahan</button>
 
-         {{ csrf_field() }}
-
-      </form>
+      {!! Form::close() !!}
     </div>
 </div>
 @endsection
