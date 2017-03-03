@@ -26,4 +26,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isAdmin()
+    {
+      // Semak role user yang sedang login
+      // Adakah beliau seorang admin?
+      if ( \Auth::user()->role == 'admin' )
+      {
+        return true;
+      }
+
+      return false;
+    }
+
 }

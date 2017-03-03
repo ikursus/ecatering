@@ -11,6 +11,8 @@
 
 <p>Ini adalah senarai users.</p>
 
+<div class="table-responsive">
+
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -69,6 +71,8 @@
 
     </tbody>
 </table>
+</div><!--table-responsive-->
+{{-- Laravel Comment --}}
 
 {{ $senarai_users->links() }}
   </div><!--/panel-body-->
