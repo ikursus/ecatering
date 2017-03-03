@@ -81,6 +81,7 @@
                 <div class="title m-b-md">
                     Sistem Tempahan Catering
                 </div>
+                <a href="{{ route('borangTempahan') }}" class="btn btn-lg btn-primary">Tempahan</a>
             </div>
         </div>
     </body>
