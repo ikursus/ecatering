@@ -21,7 +21,7 @@ class Order extends Model
     // dengan table product bagi column id
     public function product()
     {
-      return $this->belongsTo(Product::class, 'product_id');
+      return $this->belongsTo(Product::class);
       //return $this->belongsTo('App\Product');
     }
 

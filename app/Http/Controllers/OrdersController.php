@@ -80,7 +80,16 @@ class OrdersController extends Controller
           'customer_email' => 'required|email'
         ]);
 
-        $order = Order::where('customer_email', '=', $request->input('customer_email') )->first();
+        // Tetapan variable email
+        $email = $request->input('customer_email');
+        // Dapatkan maklumat order
+        $order = Order::where('customer_email', '=', $email )->first();
+
+        // Semak kewujudan order
+        if ( ! count( $order ) )
+        {
+          return redirect()->back()->with('alert-success', 'Rekod tidak dijumpai');
+        }
 
         return view('template_status_tempahan', compact('order') );
     }
