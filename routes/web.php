@@ -27,7 +27,7 @@ Route::group( [ 'middleware' => ['auth', 'filter_admin_role'] ], function() {
   Route::get('products/{id}/orders', 'ProductsController@senaraiOrders')->name('senaraiOrders');
 
   // Paparkan senarai users bagi alamat web http://localhost/catering/public/senarai-users
-  Route::get('senarai-users', 'UsersController@index');
+  Route::get('senarai-users', 'UsersController@index')->name('showUsers');
   // Proses penambahan rekod user baru
   Route::get('users/add', 'UsersController@paparBorangTambahUser');
   Route::post('users/add', 'UsersController@simpanRekodUserBaru')->name('storeUser');
@@ -41,8 +41,8 @@ Route::group( [ 'middleware' => ['auth', 'filter_admin_role'] ], function() {
 
 
 // Halaman tempahan
-Route::get('tempahan', 'OrdersController@borangTempahan');
+Route::get('tempahan', 'OrdersController@borangTempahan')->name('borangTempahan');
 Route::post('tempahan', 'OrdersController@simpanRekodTempahan')->name('simpanRekodTempahan');
 // Halaman semakan tempahan
-Route::get('status-tempahan', 'OrdersController@borangStatusTempahan');
+Route::get('status-tempahan', 'OrdersController@borangStatusTempahan')->name('statusTempahan');
 Route::post('status-tempahan', 'OrdersController@paparStatusTempahan')->name('paparStatusTempahan');
