@@ -13,7 +13,11 @@ Route::post('contact-us', 'PagesController@postContactForm');
 Route::group( [ 'middleware' => ['auth', 'filter_admin_role'] ], function() {
 
   // Paparkan senarai products bagi alamat web http://localhost/catering/public/products
+
   Route::get('products', 'ProductsController@index')->name('showProducts');
+  Route::get('products/datatables', 'ProductsController@datatables')->name('datatablesProducts');
+
+
   // Proses penambahan rekod product baru
   Route::get('products/add', 'ProductsController@create')->name('addProduct');
   Route::post('products/add', 'ProductsController@store')->name('storeProduct');

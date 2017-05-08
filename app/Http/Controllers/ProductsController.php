@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Datatables;
 
 use App\Product;
 
@@ -18,9 +19,17 @@ class ProductsController extends Controller
   {
     // Dapatkan semua rekod dari table products
     // $senarai_products = DB::table('products')->orderBy('id', 'desc')->paginate(2);
-    $senarai_products = Product::orderBy('id', 'desc')->paginate(2);
+    // $senarai_products = Product::orderBy('id', 'desc')->paginate(2);
     // Paparkan template
-    return view('template_senarai_products', compact('senarai_products') );
+    return view('template_senarai_products');
+  }
+
+  public function datatables()
+  {
+    // Berhubung dengna table products
+    $products = Product::select(['id', 'name', 'price']);
+
+    return Datatables::of($products)->make();
   }
 
   /**
